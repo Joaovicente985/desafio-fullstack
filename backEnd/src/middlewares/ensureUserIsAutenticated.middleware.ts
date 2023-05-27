@@ -14,7 +14,7 @@ const ensureUserIsAuthenticatedMiddleware = (
     throw new customError("Missing bearer token", 401);
   }
 
-  const rawToken: string = token.split("")[1];
+  const rawToken = token.split(" ")[1];
 
   jwt.verify(rawToken, process.env.SECRET_KEY!, (error: any, decoded: any) => {
     if (error) {

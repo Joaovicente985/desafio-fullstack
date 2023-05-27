@@ -9,17 +9,11 @@ const readContactsService = async (
   userId: string
 ): Promise<tContactResponse> => {
   const contactRepo: Repository<Contact> = appDataSource.getRepository(Contact);
-  const userRepo: Repository<User> = appDataSource.getRepository(User);
 
-  const user: User | null = await userRepo.findOneBy({
-    id: userId,
-  });
-
-  const contacts: Contact[] = await contactRepo.find({
-    where: {
-      user: !user,
-    },
-  });
+  const contacts: Contact[] = await contactRepo
+    .createQueryBuilder("contacts")
+    .where("contacts.user = :id", { id: userId })
+    .getMany();
 
   return contactsSchemaResponse.parse(contacts);
 };

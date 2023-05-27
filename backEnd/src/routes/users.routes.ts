@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ensureUserIsAuthenticatedMiddleware } from "../middlewares/ensureUserIsAutenticated.middleware";
 import {
   createUserController,
+  deleteUserController,
   readUserController,
   updateUserController,
 } from "../controllers/users.controllers";
@@ -22,6 +23,10 @@ usersRoutes.patch(
   validateBodyMiddleware(updateUserSchema),
   updateUserController
 );
-usersRoutes.delete("");
+usersRoutes.delete(
+  "",
+  ensureUserIsAuthenticatedMiddleware,
+  deleteUserController
+);
 
 export { usersRoutes };

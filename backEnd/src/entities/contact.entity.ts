@@ -15,7 +15,7 @@ class Contact {
   @Column({ length: 120 })
   fullName: string;
 
-  @Column({ unique: true, length: 45 })
+  @Column({ length: 45 })
   email: string;
 
   @Column({ length: 14 })
@@ -24,7 +24,7 @@ class Contact {
   @CreateDateColumn({ type: "date" })
   registerDate: Date;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (user) => user.contacts)
   user: User;
 }
 

@@ -10,7 +10,7 @@ import {
 } from "../interfaces/contact.intefaces";
 
 const readContactsController = async (req: Request, res: Response) => {
-  const userId: string = res.locals.id;
+  const userId: string = res.locals.userId;
 
   const contacts: tContactResponse = await readContactsService(userId);
 

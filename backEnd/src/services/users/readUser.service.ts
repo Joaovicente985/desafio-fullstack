@@ -7,8 +7,13 @@ import { Repository } from "typeorm";
 const readUserService = async (userId: string): Promise<tUserResponse> => {
   const userRepo: Repository<User> = appDataSource.getRepository(User);
 
-  const user: User | null = await userRepo.findOneBy({
-    id: userId,
+  const user: User | null = await userRepo.findOne({
+    relations: {
+      contacts: true,
+    },
+    where: {
+      id: userId,
+    },
   });
 
   return userSchemaResponse.parse(user);
