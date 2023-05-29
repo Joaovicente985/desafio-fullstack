@@ -8,13 +8,12 @@ const userSchema = z.object({
   password: z.string().min(6),
   phoneNumber: z.string().min(8).max(14),
   registerDate: z.date().or(z.string()),
-  contacts: contactsSchemaResponse,
+  contacts: contactsSchemaResponse.optional(),
 });
 
 const userSchemaRequest = userSchema.omit({
   id: true,
   registerDate: true,
-  contacts: true,
 });
 
 const userSchemaResponse = userSchema.omit({

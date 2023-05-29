@@ -20,7 +20,7 @@ const createUserService = async (
     throw new customError("User already exists.", 409);
   }
 
-  const createUser = userRepo.create({ ...data });
+  const createUser = userRepo.create(data);
 
   await userRepo.save(createUser);
 
