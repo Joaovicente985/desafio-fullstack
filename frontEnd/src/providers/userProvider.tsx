@@ -2,6 +2,7 @@ import { ReactNode, createContext } from "react";
 import { tLogin } from "../pages/login/validator";
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { tRegister } from "../pages/register/validator";
 
 interface UserProviderProps {
   children: ReactNode;
@@ -9,6 +10,7 @@ interface UserProviderProps {
 
 interface UserContextValues {
   loginUser: (data: tLogin) => void;
+  registerUser: (data: tRegister) => void;
 }
 
 const UserContext = createContext<UserContextValues>({} as UserContextValues);
@@ -18,7 +20,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
   const loginUser = async (data: tLogin) => {
     try {
-      console.log(data);
       const response = await api.post("/login", data);
 
       const { token } = response.data;
@@ -35,8 +36,18 @@ const UserProvider = ({ children }: UserProviderProps) => {
     }
   };
 
+  const registerUser = async (data: tRegister) => {
+    try {
+      await api.post("/users", data);
+
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ loginUser }}>
+    <UserContext.Provider value={{ loginUser, registerUser }}>
       {children}
     </UserContext.Provider>
   );

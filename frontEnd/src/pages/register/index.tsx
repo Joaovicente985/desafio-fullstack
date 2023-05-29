@@ -3,18 +3,21 @@ import { ContainerLR } from "../../components/containerLR/containerLR";
 import { FormContainer } from "../../components/formContainer/formContainer";
 import { registerSchema, tRegister } from "./validator";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuth } from "../../hooks/useAuth";
 
 const Register = () => {
   const { register, handleSubmit } = useForm<tRegister>({
     resolver: zodResolver(registerSchema),
   });
 
+  const { registerUser } = useAuth();
+
   return (
     <ContainerLR>
       <FormContainer>
         <h1>Cadastrar Usuário</h1>
 
-        <form onSubmit={handleSubmit()}>
+        <form onSubmit={handleSubmit(registerUser)}>
           <label htmlFor="fullName">Nome Completo</label>
           <input
             type="text"
