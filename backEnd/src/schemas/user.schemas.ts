@@ -14,6 +14,7 @@ const userSchema = z.object({
 const userSchemaRequest = userSchema.omit({
   id: true,
   registerDate: true,
+  contacts: true,
 });
 
 const userSchemaResponse = userSchema.omit({
