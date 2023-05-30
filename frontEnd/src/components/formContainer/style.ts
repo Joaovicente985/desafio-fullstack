@@ -30,11 +30,11 @@ const StyledFormContainer = styled.div`
 
     label {
       color: var(--grey0);
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
 
     input {
-      height: 3rem;
+      height: 4rem;
       border-radius: 1.5rem;
       background-color: var(--grey0);
       border: 2px solid black;
@@ -46,9 +46,10 @@ const StyledFormContainer = styled.div`
     }
 
     button {
-      height: 3rem;
+      height: 5rem;
       border-radius: 1.5rem;
       background-color: var(--grey0);
+      margin-top: 2rem;
       border: 2px solid black;
       color: var(--darkGreen);
       font-size: 1.5rem;
