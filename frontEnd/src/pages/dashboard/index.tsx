@@ -8,7 +8,15 @@ interface iUser {
   fullName: string;
   email: string;
   phoneNumber: string;
-  contacts: [];
+  contacts: iContacts[] | [];
+}
+
+interface iContacts {
+  id: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  registerDate: string;
 }
 
 const Dashboard = () => {
@@ -45,9 +53,36 @@ const Dashboard = () => {
         </section>
       </StyledDashHeader>
       <StyledContactsCont>
-        <h1>{user?.fullName}</h1>
-        <p>{user?.email}</p>
-        <p>{user?.phoneNumber}</p>
+        <div>
+          <h1>Seja</h1>
+          <h1>Bem</h1>
+          <h1>Vindo(a)</h1>
+          <h1>{user?.fullName}</h1>
+        </div>
+        <section>
+          <h1>Contatos</h1>
+          <ul>
+            {user ? (
+              user.contacts.length > 0 ? (
+                user.contacts.map((contact) => (
+                  <li key={contact.id}>
+                    <h3>@{contact.fullName}</h3>
+                    <span>
+                      <button>Ver contato</button>
+                      <button>Editar</button>
+                      <button>Remover</button>
+                    </span>
+                  </li>
+                ))
+              ) : (
+                <li>Não tem nada</li>
+              )
+            ) : (
+              <li>Não tem nada</li>
+            )}
+          </ul>
+          <button>Cadastrar novo contato</button>
+        </section>
       </StyledContactsCont>
     </StyledDashCont>
   );

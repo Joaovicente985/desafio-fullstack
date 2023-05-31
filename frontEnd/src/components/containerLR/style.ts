@@ -6,9 +6,7 @@ const StyledContainer = styled.main`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  overflow-y: scroll;
-  width: 100vw;
-  height: 100vh;
+  padding: 2rem 0;
 `;
 
 export { StyledContainer };
