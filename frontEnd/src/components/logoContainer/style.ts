@@ -42,6 +42,10 @@ const StyledLogoCont = styled.div`
       opacity: 80%;
     }
   }
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 export { StyledLogoCont };

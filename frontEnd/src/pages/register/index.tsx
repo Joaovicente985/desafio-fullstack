@@ -5,8 +5,10 @@ import { registerSchema, tRegister } from "./validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../hooks/useAuth";
 import { LogoContainer } from "../../components/logoContainer";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm<tRegister>({
     resolver: zodResolver(registerSchema),
   });
@@ -57,6 +59,10 @@ const Register = () => {
           <button type="submit">Cadastrar</button>
         </form>
       </FormContainer>
+      <LogoContainer>
+        <h2>Já está cadastrado?</h2>
+        <button onClick={() => navigate("/login")}>Voltar para o Login</button>
+      </LogoContainer>
     </ContainerLR>
   );
 };
