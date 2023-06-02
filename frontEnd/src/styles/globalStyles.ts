@@ -27,6 +27,7 @@ export default createGlobalStyle`
     body,html {
         width: 100%;
         height: 100vh;
+        background-color: var(--grey0);
     }
 
     button {

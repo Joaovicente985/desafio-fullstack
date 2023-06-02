@@ -19,8 +19,12 @@ const StyledDashHeader = styled.header`
   justify-content: space-between;
   background-color: var(--darkGreen);
   padding: 2rem;
-  border: 2px solid black;
+  border: 3px solid black;
   border-radius: 1rem;
+
+  @media (max-width: 500px) {
+    padding: 0.5rem;
+  }
 
   h1 {
     color: var(--grey0);
@@ -33,14 +37,18 @@ const StyledDashHeader = styled.header`
     display: flex;
     gap: 1rem;
 
+    @media (max-width: 500px) {
+      gap: 0;
+    }
+
     button {
       height: max-content;
       border-radius: 1.5rem;
       background-color: var(--grey0);
-      padding: 0.5rem 1rem;
-      border: 2px solid black;
+      padding: 1rem 1.5rem;
+      border: 3px solid black;
       color: var(--darkGreen);
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       text-shadow: 2px 0 var(--grey0), -2px 0 var(--grey0), 0 2px var(--grey0),
         0 -2px var(--grey0), 1px 1px var(--grey0), -1px -1px var(--grey0),
         1px -1px var(--grey0), -1px 1px var(--grey0);
@@ -54,14 +62,19 @@ const StyledDashHeader = styled.header`
 
 const StyledContactsCont = styled.div`
   display: flex;
-  height: 83%;
+  height: 89%;
   width: 98%;
   padding: 3rem;
   gap: 2rem;
   background-color: var(--darkGreen);
-  border: 2px solid black;
+  border: 3px solid black;
   border-radius: 1rem;
   overflow-y: scroll;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 
   ::-webkit-scrollbar {
     display: none;
@@ -74,8 +87,12 @@ const StyledContactsCont = styled.div`
     padding: 2rem;
     background: url(${image});
     background-size: cover;
-    border: 2px solid black;
+    border: 3px solid black;
     border-radius: 1rem;
+
+    @media (max-width: 700px) {
+      width: 100%;
+    }
 
     h1 {
       color: var(--darkGreen);
@@ -93,6 +110,12 @@ const StyledContactsCont = styled.div`
     width: 70%;
     gap: 1rem;
 
+    @media (max-width: 700px) {
+      width: 100%;
+      justify-content: space-around;
+      height: max-content;
+    }
+
     h1 {
       color: var(--grey0);
       font-size: 3rem;
@@ -104,17 +127,22 @@ const StyledContactsCont = styled.div`
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
+      align-items: flex-start;
       height: 83%;
       width: 100%;
       background-color: var(--grey0);
       padding: 1.5rem;
       gap: 2rem;
-      border: 2px solid black;
+      border: 3px solid black;
       border-radius: 1rem;
-      overflow-y: scroll;
+      overflow-y: auto;
 
-      h3 {
-        overflow: hidden;
+      h1 {
+        font-size: 3rem;
+        color: black;
+        text-shadow: 2px 0 var(--grey0), -2px 0 var(--grey0), 0 2px var(--grey0),
+          0 -2px var(--grey0), 1px 1px var(--grey0), -1px -1px var, 1px -1px var,
+          -1px 1px var;
       }
 
       li {
@@ -122,23 +150,34 @@ const StyledContactsCont = styled.div`
         flex-direction: column;
         justify-content: space-between;
         list-style: none;
-        width: 20%;
-        min-width: 180px;
-        max-width: 320px;
-        height: 45%;
-        padding: 1rem;
+        gap: 2rem;
+        width: 180px;
+        height: 250px;
+        padding: 2rem;
         background-color: var(--darkGreen);
         color: var(--grey0);
-        border: 2px solid black;
+        border: 3px solid black;
         border-radius: 1rem;
-        overflow: hidden;
         font-size: 2rem;
         text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
           1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
 
+        @media (max-width: 700px) {
+          width: 48%;
+        }
+
+        @media (max-width: 500px) {
+          width: 95%;
+        }
+
+        h3 {
+          overflow: hidden;
+        }
+
         span {
           display: flex;
           flex-direction: column;
+          height: 50%;
           gap: 1rem;
 
           button {
@@ -164,14 +203,23 @@ const StyledContactsCont = styled.div`
       justify-content: center;
       align-items: center;
       background-color: var(--grey0);
-      font-size: 3rem;
+      color: var(--darkGreen);
+      font-size: 2rem;
       height: 10%;
       border-radius: 1rem;
-      border: 2px solid black;
+      border: 3px solid black;
       padding: 0.3rem;
+      text-shadow: 2px 0 var(--grey0), -2px 0 var(--grey0), 0 2px var(--grey0),
+        0 -2px var(--grey0), 1px 1px var(--grey0), -1px -1px var(--grey0),
+        1px -1px var(--grey0), -1px 1px var(--grey0);
 
       :hover {
-        opacity: 90%;
+        opacity: 80%;
+      }
+
+      @media (max-width: 700px) {
+        display: flex;
+        height: 70px;
       }
     }
   }

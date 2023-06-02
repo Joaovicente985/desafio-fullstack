@@ -34,12 +34,16 @@ const Dashboard = () => {
       return navigate("/login");
     }
     (async () => {
-      const response = await api.get<iUser>("users", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(response.data);
+      try {
+        const response = await api.get<iUser>("users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(response.data);
+      } catch (error) {
+        navigate("/login");
+      }
     })();
   }, []);
 
@@ -75,10 +79,14 @@ const Dashboard = () => {
                   </li>
                 ))
               ) : (
-                <li>Não tem nada</li>
+                <>
+                  <h1>@Você ainda não tem nenhum contato...</h1>
+                </>
               )
             ) : (
-              <li>Não tem nada</li>
+              <>
+                <h1>@Carregando...</h1>
+              </>
             )}
           </ul>
           <button>Cadastrar novo contato</button>

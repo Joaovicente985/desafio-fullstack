@@ -1,17 +1,14 @@
 import { z } from "zod";
 
 const registerSchema = z.object({
-  fullName: z.string().min(10).max(120).nonempty("Insira o nome completo"),
-  email: z
-    .string()
-    .email("Insira um e-mail válido")
-    .nonempty("insira um e-mail"),
+  fullName: z.string().nonempty("Insira o nome completo").min(10).max(120),
+  email: z.string().email("Insira um e-mail válido"),
   password: z.string().nonempty("Insira uma senha"),
   phoneNumber: z
     .string()
+    .nonempty("insira um número de telefone")
     .min(8)
-    .max(14)
-    .nonempty("insira um número de telefone"),
+    .max(14),
 });
 
 type tRegister = z.infer<typeof registerSchema>;
