@@ -1,27 +1,16 @@
 import { ReactNode, createContext } from "react";
-import { z } from "zod";
 import { api } from "../services/api";
-
-const contactSchema = z.object({
-  fullName: z.string().nonempty("Insira o nome completo"),
-  email: z.string().email("Insira um email"),
-  phoneNumber: z.string().nonempty("Insira um telefone"),
-});
-
-const contactSchemaUpdate = z.object({
-  fullName: z.string().optional(),
-  email: z.string().email().optional(),
-  phoneNumber: z.string().optional(),
-});
-
-type tContact = z.infer<typeof contactSchema>;
-type tContactUpdate = z.infer<typeof contactSchemaUpdate>;
+import {
+  tContact,
+  tContactUpdate,
+} from "../components/modalCreateForm/validator";
 
 interface ContactProviderProps {
   children: ReactNode;
 }
 
 interface ContactContextValues {
+  readContact: (id: string) => void;
   createContact: (data: tContact) => void;
   updateContact: (data: tContactUpdate, id: string) => void;
   deleteContact: (id: string) => void;
@@ -32,7 +21,15 @@ const ContactContext = createContext<ContactContextValues>(
 );
 
 const ContactProvider = ({ children }: ContactProviderProps) => {
+  const readContact = async (id: string) => {
+    try {
+      await api.get(`/contact/${id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const createContact = async (data: tContact) => {
+    console.log(data);
     try {
       await api.post("/contacts", data);
 
@@ -64,7 +61,7 @@ const ContactProvider = ({ children }: ContactProviderProps) => {
 
   return (
     <ContactContext.Provider
-      value={{ createContact, updateContact, deleteContact }}
+      value={{ readContact, createContact, updateContact, deleteContact }}
     >
       {children}
     </ContactContext.Provider>
