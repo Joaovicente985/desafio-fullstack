@@ -6,10 +6,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../hooks/useAuth";
 import { LogoContainer } from "../../components/logoContainer";
 import { useNavigate } from "react-router-dom";
+import { ErrorMessage } from "./style";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm<tRegister>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<tRegister>({
     resolver: zodResolver(registerSchema),
   });
 
@@ -31,6 +36,9 @@ const Register = () => {
             placeholder="Nome Completo"
             {...register("fullName")}
           />
+          {errors.fullName && (
+            <ErrorMessage>{errors.fullName.message}</ErrorMessage>
+          )}
 
           <label htmlFor="email">Email</label>
           <input
@@ -39,6 +47,7 @@ const Register = () => {
             placeholder="Email"
             {...register("email")}
           />
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
 
           <label htmlFor="password">Senha</label>
           <input
@@ -47,14 +56,20 @@ const Register = () => {
             placeholder="Senha"
             {...register("password")}
           />
+          {errors.password && (
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          )}
 
           <label htmlFor="phoneNumber">Telefone</label>
           <input
             type="text"
             id="phoneNumber"
-            placeholder="Telefone"
+            placeholder="(xx) xxxxx-xxxx"
             {...register("phoneNumber")}
           />
+          {errors.phoneNumber && (
+            <ErrorMessage>{errors.phoneNumber.message}</ErrorMessage>
+          )}
 
           <button type="submit">Cadastrar</button>
         </form>

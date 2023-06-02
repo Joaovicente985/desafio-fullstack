@@ -11,7 +11,7 @@ const StyledLogoCont = styled.div`
   padding: 1rem;
   background-color: var(--darkGreen);
   border-radius: 1.5rem;
-  border: 2px solid black;
+  border: 3px solid black;
 
   text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
     1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
@@ -31,9 +31,9 @@ const StyledLogoCont = styled.div`
     width: 100%;
     border-radius: 1.5rem;
     background-color: var(--grey0);
-    border: 2px solid black;
+    border: 3px solid black;
     color: var(--darkGreen);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     text-shadow: 2px 0 var(--grey0), -2px 0 var(--grey0), 0 2px var(--grey0),
       0 -2px var(--grey0), 1px 1px var(--grey0), -1px -1px var(--grey0),
       1px -1px var(--grey0), -1px 1px var(--grey0);

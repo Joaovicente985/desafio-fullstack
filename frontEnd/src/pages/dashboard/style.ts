@@ -19,7 +19,7 @@ const StyledDashHeader = styled.header`
   justify-content: space-between;
   background-color: var(--darkGreen);
   padding: 2rem;
-  border: 2px solid black;
+  border: 3px solid black;
   border-radius: 1rem;
 
   @media (max-width: 500px) {
@@ -46,15 +46,15 @@ const StyledDashHeader = styled.header`
       border-radius: 1.5rem;
       background-color: var(--grey0);
       padding: 1rem 1.5rem;
-      border: 2px solid black;
-      color: yellowgreen;
-      opacity: 90%;
-      font-size: 2rem;
-      text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
-        1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+      border: 3px solid black;
+      color: var(--darkGreen);
+      font-size: 1.8rem;
+      text-shadow: 2px 0 var(--grey0), -2px 0 var(--grey0), 0 2px var(--grey0),
+        0 -2px var(--grey0), 1px 1px var(--grey0), -1px -1px var(--grey0),
+        1px -1px var(--grey0), -1px 1px var(--grey0);
 
       :hover {
-        opacity: 100%;
+        opacity: 80%;
       }
     }
   }
@@ -67,7 +67,7 @@ const StyledContactsCont = styled.div`
   padding: 3rem;
   gap: 2rem;
   background-color: var(--darkGreen);
-  border: 2px solid black;
+  border: 3px solid black;
   border-radius: 1rem;
   overflow-y: scroll;
 
@@ -87,7 +87,7 @@ const StyledContactsCont = styled.div`
     padding: 2rem;
     background: url(${image});
     background-size: cover;
-    border: 2px solid black;
+    border: 3px solid black;
     border-radius: 1rem;
 
     @media (max-width: 700px) {
@@ -133,9 +133,17 @@ const StyledContactsCont = styled.div`
       background-color: var(--grey0);
       padding: 1.5rem;
       gap: 2rem;
-      border: 2px solid black;
+      border: 3px solid black;
       border-radius: 1rem;
       overflow-y: auto;
+
+      h1 {
+        font-size: 3rem;
+        color: black;
+        text-shadow: 2px 0 var(--grey0), -2px 0 var(--grey0), 0 2px var(--grey0),
+          0 -2px var(--grey0), 1px 1px var(--grey0), -1px -1px var, 1px -1px var,
+          -1px 1px var;
+      }
 
       li {
         display: flex;
@@ -148,7 +156,7 @@ const StyledContactsCont = styled.div`
         padding: 2rem;
         background-color: var(--darkGreen);
         color: var(--grey0);
-        border: 2px solid black;
+        border: 3px solid black;
         border-radius: 1rem;
         font-size: 2rem;
         text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
@@ -195,23 +203,23 @@ const StyledContactsCont = styled.div`
       justify-content: center;
       align-items: center;
       background-color: var(--grey0);
-      color: yellowgreen;
-      opacity: 90%;
+      color: var(--darkGreen);
       font-size: 2rem;
       height: 10%;
       border-radius: 1rem;
-      border: 2px solid black;
+      border: 3px solid black;
       padding: 0.3rem;
-      text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
-        1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+      text-shadow: 2px 0 var(--grey0), -2px 0 var(--grey0), 0 2px var(--grey0),
+        0 -2px var(--grey0), 1px 1px var(--grey0), -1px -1px var(--grey0),
+        1px -1px var(--grey0), -1px 1px var(--grey0);
 
       :hover {
-        opacity: 100%;
+        opacity: 80%;
       }
 
       @media (max-width: 700px) {
         display: flex;
-        height: 50px;
+        height: 70px;
       }
     }
   }

@@ -6,9 +6,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../hooks/useAuth";
 import { LogoContainer } from "../../components/logoContainer";
 import { useNavigate } from "react-router-dom";
+import { ErrorMessage } from "./style";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm<tLogin>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<tLogin>({
     resolver: zodResolver(loginSchema),
   });
 
@@ -32,6 +37,7 @@ const Login = () => {
             placeholder="Email"
             {...register("email")}
           />
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
 
           <label htmlFor="password">Senha</label>
           <input
@@ -40,6 +46,9 @@ const Login = () => {
             placeholder="Senha"
             {...register("password")}
           />
+          {errors.password && (
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          )}
 
           <button type="submit">Entrar</button>
         </form>
