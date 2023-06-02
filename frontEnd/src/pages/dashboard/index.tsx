@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
-import { StyledContactsCont, StyledDashCont, StyledDashHeader } from "./style";
+import {
+  StyledContactsCont,
+  StyledDashCont,
+  StyledDashHeader,
+  StyledModalContainer,
+} from "./style";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import { ModalCreateForm } from "../../components/modalCreateForm";
 
 interface iUser {
   id: string;
@@ -23,6 +29,9 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("@Token");
   const [user, setUser] = useState<iUser>();
+  const [modal, setModal] = useState<boolean>(false);
+  const [modalCreate, setModalCreate] = useState<boolean>(false);
+  const [modalUpdate, setModalUpdate] = useState<boolean>(false);
 
   const logoutUser = () => {
     localStorage.removeItem("@Token");
@@ -48,51 +57,68 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <StyledDashCont>
-      <StyledDashHeader>
-        <h1>@Contacts</h1>
-        <section>
-          <button>Info</button>
-          <button onClick={() => logoutUser()}>Logout</button>
-        </section>
-      </StyledDashHeader>
-      <StyledContactsCont>
-        <div>
-          <h1>Seja</h1>
-          <h1>Bem</h1>
-          <h1>Vindo(a)</h1>
-          <h1>{user?.fullName}</h1>
-        </div>
-        <section>
-          <h1>Contatos</h1>
-          <ul>
-            {user ? (
-              user.contacts.length > 0 ? (
-                user.contacts.map((contact) => (
-                  <li key={contact.id}>
-                    <h3>@{contact.fullName}</h3>
-                    <span>
-                      <button>Ver contato</button>
-                      <button>Editar</button>
-                      <button>Remover</button>
-                    </span>
-                  </li>
-                ))
+    <>
+      {modal && <StyledModalContainer></StyledModalContainer>}
+      {modalCreate && (
+        <StyledModalContainer>
+          <div>
+            <ModalCreateForm />
+          </div>
+        </StyledModalContainer>
+      )}
+      {modalUpdate && <StyledModalContainer></StyledModalContainer>}
+      <StyledDashCont>
+        <StyledDashHeader>
+          <h1>@Contacts</h1>
+          <section>
+            <button onClick={() => setModal(true)}>Info</button>
+            <button onClick={() => logoutUser()}>Logout</button>
+          </section>
+        </StyledDashHeader>
+        <StyledContactsCont>
+          <div>
+            <h1>Seja</h1>
+            <h1>Bem</h1>
+            <h1>Vindo(a)</h1>
+            <h1>{user?.fullName}</h1>
+          </div>
+          <section>
+            <h1>Contatos</h1>
+            <ul>
+              {user ? (
+                user.contacts.length > 0 ? (
+                  user.contacts.map((contact) => (
+                    <li key={contact.id}>
+                      <h3>@{contact.fullName}</h3>
+                      <span>
+                        <button onClick={() => setModal(true)}>
+                          Ver contato
+                        </button>
+                        <button onClick={() => setModalUpdate(true)}>
+                          Editar
+                        </button>
+                        <button onClick={() => setModal(true)}>Remover</button>
+                      </span>
+                    </li>
+                  ))
+                ) : (
+                  <>
+                    <h1>@Você ainda não tem nenhum contato...</h1>
+                  </>
+                )
               ) : (
                 <>
-                  <h1>@Você ainda não tem nenhum contato...</h1>
+                  <h1>@Carregando...</h1>
                 </>
-              )
-            ) : (
-              <>
-                <h1>@Carregando...</h1>
-              </>
-            )}
-          </ul>
-          <button>Cadastrar novo contato</button>
-        </section>
-      </StyledContactsCont>
-    </StyledDashCont>
+              )}
+            </ul>
+            <button onClick={() => setModalCreate(true)}>
+              Cadastrar novo contato
+            </button>
+          </section>
+        </StyledContactsCont>
+      </StyledDashCont>
+    </>
   );
 };
 

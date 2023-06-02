@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../hooks/useAuth";
 import { LogoContainer } from "../../components/logoContainer";
 import { useNavigate } from "react-router-dom";
-import { ErrorMessage } from "./style";
+import { ErrorMessage } from "../../components/modalCreateForm/style";
 
 const Login = () => {
   const {

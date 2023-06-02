@@ -225,4 +225,30 @@ const StyledContactsCont = styled.div`
   }
 `;
 
-export { StyledDashCont, StyledDashHeader, StyledContactsCont };
+const StyledModalContainer = styled.div`
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(107, 202, 60, 0.38);
+  z-index: 999;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    width: 50rem;
+    height: max-content;
+    background-color: var(--darkGreen);
+    border: 3px solid black;
+    border-radius: 1rem;
+  }
+`;
+
+export {
+  StyledDashCont,
+  StyledDashHeader,
+  StyledContactsCont,
+  StyledModalContainer,
+};
