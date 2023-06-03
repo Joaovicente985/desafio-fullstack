@@ -10,10 +10,10 @@ interface ContactProviderProps {
 }
 
 interface ContactContextValues {
-  readContact: (id: string) => void;
+  readContact: () => void;
   createContact: (data: tContact) => void;
-  updateContact: (data: tContactUpdate, id: string) => void;
-  deleteContact: (id: string) => void;
+  updateContact: (data: tContactUpdate) => void;
+  deleteContact: () => void;
 }
 
 const ContactContext = createContext<ContactContextValues>(
@@ -21,17 +21,23 @@ const ContactContext = createContext<ContactContextValues>(
 );
 
 const ContactProvider = ({ children }: ContactProviderProps) => {
-  const readContact = async (id: string) => {
+  const getToken = localStorage.getItem("@Token");
+
+  const readContact = async () => {
+    const id = localStorage.getItem("@Id");
     try {
-      await api.get(`/contact/${id}`);
+      await api.get(`/contacts/${id}`);
     } catch (error) {
       console.error(error);
     }
   };
   const createContact = async (data: tContact) => {
-    console.log(data);
     try {
-      await api.post("/contacts", data);
+      await api.post("/contacts", data, {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
+      });
 
       alert("Contato criado com sucesso!");
     } catch (error) {
@@ -39,7 +45,8 @@ const ContactProvider = ({ children }: ContactProviderProps) => {
     }
   };
 
-  const updateContact = async (data: tContactUpdate, id: string) => {
+  const updateContact = async (data: tContactUpdate) => {
+    const id = localStorage.getItem("@Id");
     try {
       api.patch(`/contacts/${id}`, data);
 
@@ -49,7 +56,8 @@ const ContactProvider = ({ children }: ContactProviderProps) => {
     }
   };
 
-  const deleteContact = async (id: string) => {
+  const deleteContact = async () => {
+    const id = localStorage.getItem("@Id");
     try {
       await api.delete(`/contacts/${id}`);
 

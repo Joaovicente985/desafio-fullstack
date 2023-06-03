@@ -8,6 +8,7 @@ import {
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { ModalCreateForm } from "../../components/modalCreateForm";
+import { useContact } from "../../hooks/useContact";
 
 interface iUser {
   id: string;
@@ -32,6 +33,9 @@ const Dashboard = () => {
   const [modal, setModal] = useState<boolean>(false);
   const [modalCreate, setModalCreate] = useState<boolean>(false);
   const [modalUpdate, setModalUpdate] = useState<boolean>(false);
+  const [contactInfo, setContactInfo] = useState<iContacts | void>();
+
+  const { readContact, deleteContact } = useContact();
 
   const logoutUser = () => {
     localStorage.removeItem("@Token");
@@ -58,7 +62,16 @@ const Dashboard = () => {
 
   return (
     <>
-      {modal && <StyledModalContainer></StyledModalContainer>}
+      {modal && (
+        <StyledModalContainer>
+          <div>
+            <h1>{contactInfo?.fullName}</h1>
+            <h2>{contactInfo?.email}</h2>
+            <h2>{contactInfo?.phoneNumber}</h2>
+            <h2>{contactInfo?.registerDate}</h2>
+          </div>
+        </StyledModalContainer>
+      )}
       {modalCreate && (
         <StyledModalContainer>
           <div>
@@ -66,7 +79,11 @@ const Dashboard = () => {
           </div>
         </StyledModalContainer>
       )}
-      {modalUpdate && <StyledModalContainer></StyledModalContainer>}
+      {modalUpdate && (
+        <StyledModalContainer>
+          <div></div>
+        </StyledModalContainer>
+      )}
       <StyledDashCont>
         <StyledDashHeader>
           <h1>@Contacts</h1>
@@ -91,13 +108,33 @@ const Dashboard = () => {
                     <li key={contact.id}>
                       <h3>@{contact.fullName}</h3>
                       <span>
-                        <button onClick={() => setModal(true)}>
+                        <button
+                          onClick={() => {
+                            localStorage.setItem("@Id", contact.id),
+                              setModal(true),
+                              setContactInfo(readContact());
+                          }}
+                        >
                           Ver contato
                         </button>
-                        <button onClick={() => setModalUpdate(true)}>
+                        <button
+                          onClick={() => {
+                            localStorage.setItem("@Id", contact.id),
+                              setModalUpdate(true),
+                              setContactInfo(readContact());
+                          }}
+                        >
                           Editar
                         </button>
-                        <button onClick={() => setModal(true)}>Remover</button>
+                        <button
+                          onClick={() => {
+                            localStorage.setItem("@Id", contact.id),
+                              setContactInfo(readContact()),
+                              setModal(true);
+                          }}
+                        >
+                          Remover
+                        </button>
                       </span>
                     </li>
                   ))

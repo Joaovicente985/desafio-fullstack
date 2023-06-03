@@ -7,9 +7,9 @@ const contactSchema = z.object({
 });
 
 const contactSchemaUpdate = z.object({
-  fullName: z.string().optional(),
-  email: z.string().email().optional(),
-  phoneNumber: z.string().optional(),
+  fullName: z.string(),
+  email: z.string().email(),
+  phoneNumber: z.string(),
 });
 
 type tContact = z.infer<typeof contactSchema>;
