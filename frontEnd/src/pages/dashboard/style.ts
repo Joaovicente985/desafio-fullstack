@@ -238,11 +238,83 @@ const StyledModalContainer = styled.div`
   div {
     display: flex;
     flex-direction: column;
-    width: 50rem;
+    padding: 2rem;
+    min-width: 30rem;
+    max-width: 90%;
+    width: max-content;
+    min-height: 30rem;
     height: max-content;
     background-color: var(--darkGreen);
     border: 3px solid black;
     border-radius: 1rem;
+    gap: 2rem;
+
+    section {
+      display: flex;
+      width: 100%;
+      align-items: flex-end;
+      justify-content: flex-end;
+
+      button {
+        display: flex;
+        color: var(--grey0);
+        background-color: yellowgreen;
+        height: 30%;
+        opacity: 90%;
+        font-size: 1.6rem;
+        padding: 0.7rem 1.3rem;
+        border-radius: 150%;
+        border: 3px solid black;
+        text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+          1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+
+        :hover {
+          opacity: 100%;
+        }
+      }
+    }
+
+    span {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background-color: var(--grey0);
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 3px solid black;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8rem 3rem;
+        background-color: var(--darkGreen);
+        border-radius: 150%;
+        border: 3px solid black;
+        color: var(--grey0);
+        font-size: 2rem;
+        opacity: 100%;
+        text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+          1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+        :hover {
+          background-color: var(--alert);
+        }
+      }
+    }
+
+    h1 {
+      color: yellowgreen;
+      font-size: 2rem;
+      text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+        1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+    }
+
+    h3 {
+      font-size: 2rem;
+      text-shadow: 2px 0 yellowgreen, -2px 0 yellowgreen, 0 2px yellowgreen,
+        0 -2px yellowgreen, 1px 1px yellowgreen, -1px -1px yellowgreen,
+        1px -1px yellowgreen, -1px 1px yellowgreen;
+    }
   }
 `;
 

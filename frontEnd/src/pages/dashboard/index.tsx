@@ -9,33 +9,44 @@ import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { ModalCreateForm } from "../../components/modalCreateForm";
 import { useContact } from "../../hooks/useContact";
-
-interface iUser {
-  id: string;
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  contacts: iContacts[] | [];
-}
-
-interface iContacts {
-  id: string;
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  registerDate: string;
-}
+import { iUser } from "../../interfaces";
+import { ModalUpdateForm } from "../../components/modalUpdateForm";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("@Token");
   const [user, setUser] = useState<iUser>();
-  const [modal, setModal] = useState<boolean>(false);
-  const [modalCreate, setModalCreate] = useState<boolean>(false);
-  const [modalUpdate, setModalUpdate] = useState<boolean>(false);
-  const [contactInfo, setContactInfo] = useState<iContacts | void>();
 
-  const { readContact, deleteContact } = useContact();
+  const {
+    readContact,
+    deleteContact,
+    contactInfo,
+    setContactInfo,
+    modal,
+    modalCreate,
+    modalUpdate,
+    modalDelete,
+    setModal,
+    setModalCreate,
+    setModalUpdate,
+    setModalDelete,
+  } = useContact();
+
+  const getContactInfo = async () => {
+    const token = localStorage.getItem("@Token");
+    const contactId = localStorage.getItem("@Id");
+    try {
+      const response = await api.get(`/contacts/${contactId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setContactInfo(response.data);
+      setModalUpdate(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const logoutUser = () => {
     localStorage.removeItem("@Token");
@@ -43,6 +54,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    console.log("oi");
     if (!token) {
       return navigate("/login");
     }
@@ -58,30 +70,62 @@ const Dashboard = () => {
         navigate("/login");
       }
     })();
-  }, []);
+  }, [modal, modalCreate, modalUpdate, modalDelete, token, navigate]);
 
   return (
     <>
       {modal && (
         <StyledModalContainer>
           <div>
-            <h1>{contactInfo?.fullName}</h1>
-            <h2>{contactInfo?.email}</h2>
-            <h2>{contactInfo?.phoneNumber}</h2>
-            <h2>{contactInfo?.registerDate}</h2>
+            <section>
+              <button onClick={() => setModal(false)}>X</button>
+            </section>
+            <span>
+              <h1>Nome Completo</h1>
+              <h3>{contactInfo?.fullName}</h3>
+              <h1>E-mail</h1>
+              <h3>{contactInfo?.email}</h3>
+              <h1>Telefone</h1>
+              <h3>{contactInfo?.phoneNumber}</h3>
+              <h1>Data de cadastro</h1>
+              <h3>{contactInfo?.registerDate}</h3>
+            </span>
           </div>
         </StyledModalContainer>
       )}
       {modalCreate && (
         <StyledModalContainer>
           <div>
+            <section>
+              <button onClick={() => setModalCreate(false)}>X</button>
+            </section>
             <ModalCreateForm />
           </div>
         </StyledModalContainer>
       )}
       {modalUpdate && (
         <StyledModalContainer>
-          <div></div>
+          <div>
+            <section>
+              <button onClick={() => setModalUpdate(false)}>X</button>
+            </section>
+            <ModalUpdateForm />
+          </div>
+        </StyledModalContainer>
+      )}
+      {modalDelete && (
+        <StyledModalContainer>
+          <div>
+            <section>
+              <button onClick={() => setModalDelete(false)}>X</button>
+            </section>
+            <span>
+              <h1>Deseja remover este contato?</h1>
+            </span>
+            <span>
+              <button onClick={() => deleteContact()}>Remover</button>
+            </span>
+          </div>
         </StyledModalContainer>
       )}
       <StyledDashCont>
@@ -111,8 +155,7 @@ const Dashboard = () => {
                         <button
                           onClick={() => {
                             localStorage.setItem("@Id", contact.id),
-                              setModal(true),
-                              setContactInfo(readContact());
+                              readContact();
                           }}
                         >
                           Ver contato
@@ -120,8 +163,7 @@ const Dashboard = () => {
                         <button
                           onClick={() => {
                             localStorage.setItem("@Id", contact.id),
-                              setModalUpdate(true),
-                              setContactInfo(readContact());
+                              getContactInfo();
                           }}
                         >
                           Editar
@@ -129,8 +171,7 @@ const Dashboard = () => {
                         <button
                           onClick={() => {
                             localStorage.setItem("@Id", contact.id),
-                              setContactInfo(readContact()),
-                              setModal(true);
+                              setModalDelete(true);
                           }}
                         >
                           Remover

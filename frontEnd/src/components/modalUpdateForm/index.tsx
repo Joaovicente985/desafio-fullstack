@@ -16,7 +16,7 @@ const ModalUpdateForm = () => {
     resolver: zodResolver(contactSchemaUpdate),
   });
 
-  const { updateContact } = useContact();
+  const { updateContact, contactInfo } = useContact();
 
   return (
     <StyledModalForm onSubmit={handleSubmit(updateContact)}>
@@ -25,6 +25,7 @@ const ModalUpdateForm = () => {
         type="text"
         id="fullName"
         placeholder="Nome Completo"
+        defaultValue={contactInfo?.fullName}
         {...register("fullName")}
       />
       {errors.fullName && (
@@ -36,6 +37,7 @@ const ModalUpdateForm = () => {
         type="email"
         id="email"
         placeholder="Email"
+        defaultValue={contactInfo?.email}
         {...register("email")}
       />
       {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
@@ -45,6 +47,7 @@ const ModalUpdateForm = () => {
         type="text"
         id="phoneNumber"
         placeholder="(xx) xxxxx-xxxx"
+        defaultValue={contactInfo?.phoneNumber}
         {...register("phoneNumber")}
       />
       {errors.phoneNumber && (

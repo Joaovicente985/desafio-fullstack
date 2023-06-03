@@ -8,6 +8,8 @@ export default createGlobalStyle`
 
         --grey0: #DEE0FB;
 
+        --alert: #b90000;
+
         font-size: 60%;
     }
 
