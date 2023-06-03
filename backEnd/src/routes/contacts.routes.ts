@@ -12,7 +12,7 @@ import {
 const contactsRoutes = Router();
 
 contactsRoutes.get(
-  "",
+  "/:id",
   ensureUserIsAuthenticatedMiddleware,
   readContactsController
 );
