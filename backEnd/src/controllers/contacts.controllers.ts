@@ -5,16 +5,18 @@ import { updateContactService } from "../services/contacs/updateContact.service"
 import { deleteContactService } from "../services/contacs/deleteContact.service";
 import {
   tContactRequest,
-  tContactResponse,
+  tContact,
   tContactUpdate,
 } from "../interfaces/contact.intefaces";
 
 const readContactsController = async (req: Request, res: Response) => {
+  console.log(res.locals.userId);
   const userId: string = res.locals.userId;
+  const contactId: string = req.params.id;
 
-  const contacts: tContactResponse = await readContactsService(userId);
+  const contact: tContact = await readContactsService(userId, contactId);
 
-  return res.json(contacts);
+  return res.json(contact);
 };
 
 const createContactController = async (req: Request, res: Response) => {
