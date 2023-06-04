@@ -40,7 +40,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     try {
       await api.post("/users", data);
 
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
