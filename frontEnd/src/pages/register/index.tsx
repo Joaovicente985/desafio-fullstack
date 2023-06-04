@@ -76,7 +76,7 @@ const Register = () => {
       </FormContainer>
       <LogoContainer>
         <h2>Já está cadastrado?</h2>
-        <button onClick={() => navigate("/login")}>Voltar para o Login</button>
+        <button onClick={() => navigate("/")}>Voltar para o Login</button>
       </LogoContainer>
     </ContainerLR>
   );

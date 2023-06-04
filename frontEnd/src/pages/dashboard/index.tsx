@@ -52,12 +52,12 @@ const Dashboard = () => {
 
   const logoutUser = () => {
     localStorage.removeItem("@Token");
-    navigate("/login");
+    navigate("/");
   };
 
   useEffect(() => {
     if (!token) {
-      return navigate("/login");
+      return navigate("/");
     }
     (async () => {
       try {
@@ -68,7 +68,7 @@ const Dashboard = () => {
         });
         setUser(response.data);
       } catch (error) {
-        navigate("/login");
+        navigate("/");
       }
     })();
   }, [modal, modalCreate, modalUpdate, modalDelete, token, navigate]);
