@@ -3,6 +3,7 @@ interface iUser {
   fullName: string;
   email: string;
   phoneNumber: string;
+  registerDate: string;
   contacts: iContact[] | [];
 }
 
