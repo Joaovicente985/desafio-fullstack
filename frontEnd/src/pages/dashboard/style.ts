@@ -111,8 +111,9 @@ const StyledContactsCont = styled.div`
     gap: 1rem;
 
     @media (max-width: 700px) {
+      display: flex;
       width: 100%;
-      justify-content: space-around;
+      justify-content: flex-start;
       height: max-content;
     }
 
@@ -243,6 +244,7 @@ const StyledModalContainer = styled.div`
     max-width: 90%;
     width: max-content;
     min-height: 30rem;
+    max-height: 90vh;
     height: max-content;
     background-color: var(--darkGreen);
     border: 3px solid black;
@@ -277,11 +279,13 @@ const StyledModalContainer = styled.div`
     span {
       display: flex;
       flex-direction: column;
+      max-height: 25rem;
       gap: 1rem;
       background-color: var(--grey0);
       padding: 1rem;
       border-radius: 1rem;
       border: 3px solid black;
+      overflow-y: scroll;
 
       button {
         display: flex;

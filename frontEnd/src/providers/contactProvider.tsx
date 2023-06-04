@@ -21,10 +21,12 @@ interface ContactContextValues {
   modalCreate: boolean;
   modalUpdate: boolean;
   modalDelete: boolean;
+  modalInfo: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   setModalCreate: React.Dispatch<React.SetStateAction<boolean>>;
   setModalUpdate: React.Dispatch<React.SetStateAction<boolean>>;
   setModalDelete: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalInfo: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ContactContext = createContext<ContactContextValues>(
@@ -38,6 +40,7 @@ const ContactProvider = ({ children }: ContactProviderProps) => {
   const [modalCreate, setModalCreate] = useState<boolean>(false);
   const [modalUpdate, setModalUpdate] = useState<boolean>(false);
   const [modalDelete, setModalDelete] = useState<boolean>(false);
+  const [modalInfo, setModalInfo] = useState<boolean>(false);
 
   const readContact = async () => {
     const id = localStorage.getItem("@Id");
@@ -113,10 +116,12 @@ const ContactProvider = ({ children }: ContactProviderProps) => {
         modalCreate,
         modalUpdate,
         modalDelete,
+        modalInfo,
         setModal,
         setModalCreate,
         setModalUpdate,
         setModalDelete,
+        setModalInfo,
       }}
     >
       {children}

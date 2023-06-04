@@ -17,6 +17,7 @@
     "react-hook-form": "^7.44.1",
     "react-router-dom": "^6.11.2",
     "styled-components": "5",
+    "vercel": "^30.1.2",
     "zod": "^3.21.4"
   },
   "devDependencies": {

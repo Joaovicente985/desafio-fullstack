@@ -26,10 +26,12 @@ const Dashboard = () => {
     modalCreate,
     modalUpdate,
     modalDelete,
+    modalInfo,
     setModal,
     setModalCreate,
     setModalUpdate,
     setModalDelete,
+    setModalInfo,
   } = useContact();
 
   const getContactInfo = async () => {
@@ -54,7 +56,6 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    console.log("oi");
     if (!token) {
       return navigate("/login");
     }
@@ -74,6 +75,55 @@ const Dashboard = () => {
 
   return (
     <>
+      {modalInfo && (
+        <StyledModalContainer>
+          <div>
+            <section>
+              <button onClick={() => setModalInfo(false)}>X</button>
+            </section>
+            <span>
+              <h3>{user?.fullName}</h3>
+              <h1>E-mail</h1>
+              <h3>{user?.email}</h3>
+              <h1>Telefone</h1>
+              <h3>{user?.phoneNumber}</h3>
+              <h1>Data de cadastro</h1>
+              <h3>{user?.registerDate}</h3>
+            </span>
+            <span>
+              {user ? (
+                user.contacts.length > 0 ? (
+                  user.contacts.map((contact) => (
+                    <ul key={contact.id}>
+                      <h1>Contato:</h1>
+                      <br />
+                      <h1>Nome</h1>
+                      <h3>{contact.fullName}</h3>
+                      <h1>E-mail</h1>
+                      <h3>{contact.email}</h3>
+                      <h1>Telefone</h1>
+                      <h3>{contact.phoneNumber}</h3>
+                      <h1>Data de cadastro</h1>
+                      <h3>{contact.registerDate}</h3>
+                      <h1>-----------------------------------</h1>
+                      <br />
+                      <br />
+                    </ul>
+                  ))
+                ) : (
+                  <>
+                    <h1>@Você ainda não tem nenhum contato...</h1>
+                  </>
+                )
+              ) : (
+                <>
+                  <h1>@Carregando...</h1>
+                </>
+              )}
+            </span>
+          </div>
+        </StyledModalContainer>
+      )}
       {modal && (
         <StyledModalContainer>
           <div>
@@ -132,7 +182,7 @@ const Dashboard = () => {
         <StyledDashHeader>
           <h1>@Contacts</h1>
           <section>
-            <button onClick={() => setModal(true)}>Info</button>
+            <button onClick={() => setModalInfo(true)}>Info</button>
             <button onClick={() => logoutUser()}>Logout</button>
           </section>
         </StyledDashHeader>
@@ -144,7 +194,7 @@ const Dashboard = () => {
             <h1>{user?.fullName}</h1>
           </div>
           <section>
-            <h1>Contatos</h1>
+            <h1>Contatos:</h1>
             <ul>
               {user ? (
                 user.contacts.length > 0 ? (
