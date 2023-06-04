@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext } from "react";
 import { tLogin } from "../pages/login/validator";
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
