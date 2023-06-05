@@ -274,6 +274,18 @@ const StyledModalContainer = styled.div`
           opacity: 100%;
         }
       }
+      .alert {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background-color: var(--alert);
+        color: var(--grey0);
+        border: 3px solid black;
+        border-radius: 1rem;
+        text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+          1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+      }
     }
 
     span {

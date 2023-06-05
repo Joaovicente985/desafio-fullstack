@@ -13,10 +13,13 @@ interface UserContextValues {
   loginUser: (data: tLogin) => void;
   registerUser: (data: tRegister) => void;
   updateUser: (data: tRegister) => void;
+  deleteUser: () => void;
   user: iUser | undefined;
   modalUpdateUser: boolean;
-  setModalUpdateUser: React.Dispatch<React.SetStateAction<boolean>>;
+  modalDeleteUser: boolean;
   setUser: React.Dispatch<React.SetStateAction<iUser | undefined>>;
+  setModalUpdateUser: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalDeleteUser: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UserContext = createContext<UserContextValues>({} as UserContextValues);
@@ -25,6 +28,8 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<iUser>();
   const [modalUpdateUser, setModalUpdateUser] = useState<boolean>(false);
+  const [modalDeleteUser, setModalDeleteUser] = useState<boolean>(false);
+  const getToken = localStorage.getItem("@Token");
 
   const loginUser = async (data: tLogin) => {
     try {
@@ -48,6 +53,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     try {
       await api.post("/users", data);
 
+      alert("Usuário cadastrado com sucesso!");
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -55,7 +61,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
   };
 
   const updateUser = async (data: tRegister) => {
-    const getToken = localStorage.getItem("@Token");
     try {
       await api.patch("/users", data, {
         headers: {
@@ -77,16 +82,34 @@ const UserProvider = ({ children }: UserProviderProps) => {
     }
   };
 
+  const deleteUser = async () => {
+    try {
+      await api.delete("/users", {
+        headers: {
+          Authorization: `Bearer ${getToken}`,
+        },
+      });
+
+      alert("Usuário deletado com sucesso, redirecionando...");
+      navigate("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
         loginUser,
         registerUser,
         updateUser,
+        deleteUser,
         user,
         modalUpdateUser,
+        modalDeleteUser,
         setUser,
         setModalUpdateUser,
+        setModalDeleteUser,
       }}
     >
       {children}
