@@ -35,7 +35,15 @@ const Dashboard = () => {
     setModalInfo,
   } = useContact();
 
-  const { user, modalUpdateUser, setUser, setModalUpdateUser } = useAuth();
+  const {
+    user,
+    modalUpdateUser,
+    modalDeleteUser,
+    setUser,
+    setModalUpdateUser,
+    setModalDeleteUser,
+    deleteUser,
+  } = useAuth();
 
   const getContactInfo = async () => {
     const token = localStorage.getItem("@Token");
@@ -134,7 +142,18 @@ const Dashboard = () => {
               )}
             </span>
             <section>
-              <button onClick={() => setModalUpdateUser(true)}>Editar</button>
+              <button
+                className="alert"
+                onClick={() => setModalUpdateUser(true)}
+              >
+                Editar
+              </button>
+              <button
+                className="alert"
+                onClick={() => setModalDeleteUser(true)}
+              >
+                Remover conta
+              </button>
             </section>
           </div>
         </StyledModalContainer>
@@ -146,6 +165,21 @@ const Dashboard = () => {
               <button onClick={() => setModalUpdateUser(false)}>X</button>
             </section>
             <ModalUpdateUser />
+          </div>
+        </StyledModalContainer>
+      )}
+      {modalDeleteUser && (
+        <StyledModalContainer>
+          <div>
+            <section>
+              <button onClick={() => setModalDeleteUser(false)}>X</button>
+            </section>
+            <span>
+              <h1>Deseja remover sua conta?</h1>
+            </span>
+            <span>
+              <button onClick={() => deleteUser()}>Remover</button>
+            </span>
           </div>
         </StyledModalContainer>
       )}
