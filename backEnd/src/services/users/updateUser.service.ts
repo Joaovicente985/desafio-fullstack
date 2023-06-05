@@ -14,10 +14,12 @@ const updateUserService = async (
     id: userId,
   });
 
-  const userResponse: tUserUpdate = await userRepo.save({
+  const userResponse: tUserUpdate = userRepo.create({
     ...foundUser,
     ...partialData,
   });
+
+  await userRepo.save(userResponse);
 
   return userSchemaResponse.parse(userResponse);
 };
