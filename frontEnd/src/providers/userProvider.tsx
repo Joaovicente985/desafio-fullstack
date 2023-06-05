@@ -4,7 +4,6 @@ import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { tRegister } from "../pages/register/validator";
 import { iUser } from "../interfaces";
-import { useContact } from "../hooks/useContact";
 
 interface UserProviderProps {
   children: ReactNode;
@@ -27,7 +26,6 @@ const UserContext = createContext<UserContextValues>({} as UserContextValues);
 
 const UserProvider = ({ children }: UserProviderProps) => {
   const navigate = useNavigate();
-  const { setModalInfo } = useContact();
   const [user, setUser] = useState<iUser>();
   const [modalUpdateUser, setModalUpdateUser] = useState<boolean>(false);
   const [modalDeleteUser, setModalDeleteUser] = useState<boolean>(false);
@@ -55,6 +53,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     try {
       await api.post("/users", data);
 
+      alert("Usuário cadastrado com sucesso!");
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -92,8 +91,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
       });
 
       alert("Usuário deletado com sucesso, redirecionando...");
-      setModalDeleteUser(false);
-      setModalInfo(false);
       navigate("");
     } catch (error) {
       console.error(error);

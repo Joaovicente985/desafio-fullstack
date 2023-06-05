@@ -70,6 +70,8 @@ const Dashboard = () => {
     if (!token) {
       return navigate("/");
     }
+    setModalDeleteUser(false);
+    setModalInfo(false);
     (async () => {
       try {
         const response = await api.get<iUser>("users", {
@@ -91,6 +93,8 @@ const Dashboard = () => {
     navigate,
     setUser,
     setModalUpdateUser,
+    setModalDeleteUser,
+    setModalInfo,
   ]);
 
   return (
