@@ -50,7 +50,7 @@ yarn
 </div>
 
 ```bash
-Na pasta do frontEnd:
+Na pasta do backEnd:
 # caso use npm
 npm run typeorm migration:run -- -d ./src/data-source.ts
 
