@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   StyledContactsCont,
   StyledDashCont,
@@ -11,11 +11,12 @@ import { ModalCreateForm } from "../../components/modalCreateForm";
 import { useContact } from "../../hooks/useContact";
 import { iUser } from "../../interfaces";
 import { ModalUpdateForm } from "../../components/modalUpdateForm";
+import { useAuth } from "../../hooks/useAuth";
+import { ModalUpdateUser } from "../../components/modalUpdateUser";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("@Token");
-  const [user, setUser] = useState<iUser>();
 
   const {
     readContact,
@@ -33,6 +34,8 @@ const Dashboard = () => {
     setModalDelete,
     setModalInfo,
   } = useContact();
+
+  const { user, modalUpdateUser, setUser, setModalUpdateUser } = useAuth();
 
   const getContactInfo = async () => {
     const token = localStorage.getItem("@Token");
@@ -71,7 +74,16 @@ const Dashboard = () => {
         navigate("/");
       }
     })();
-  }, [modal, modalCreate, modalUpdate, modalDelete, token, navigate]);
+  }, [
+    modal,
+    modalCreate,
+    modalUpdate,
+    modalDelete,
+    token,
+    navigate,
+    setUser,
+    setModalUpdateUser,
+  ]);
 
   return (
     <>
@@ -121,6 +133,19 @@ const Dashboard = () => {
                 </>
               )}
             </span>
+            <section>
+              <button onClick={() => setModalUpdateUser(true)}>Editar</button>
+            </section>
+          </div>
+        </StyledModalContainer>
+      )}
+      {modalUpdateUser && (
+        <StyledModalContainer>
+          <div>
+            <section>
+              <button onClick={() => setModalUpdateUser(false)}>X</button>
+            </section>
+            <ModalUpdateUser />
           </div>
         </StyledModalContainer>
       )}
