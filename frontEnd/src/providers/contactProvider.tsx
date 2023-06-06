@@ -5,6 +5,7 @@ import {
   tContactUpdate,
 } from "../components/modalCreateForm/validator";
 import { iContact } from "../interfaces";
+import { toast } from "react-toastify";
 
 interface ContactProviderProps {
   children: ReactNode;
@@ -53,6 +54,16 @@ const ContactProvider = ({ children }: ContactProviderProps) => {
       setContactInfo(response.data);
       setModal(true);
     } catch (error) {
+      toast.error("Ops, deu algum erro, tente novamente!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       console.error(error);
     }
   };
@@ -64,9 +75,28 @@ const ContactProvider = ({ children }: ContactProviderProps) => {
         },
       });
 
-      alert("Contato criado com sucesso!");
+      toast.success("Contato criado com sucesso!", {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setModalCreate(false);
     } catch (error) {
+      toast.error("Ops, deu algum erro, tente novamente!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       console.error(error);
     }
   };
@@ -80,9 +110,28 @@ const ContactProvider = ({ children }: ContactProviderProps) => {
         },
       });
 
-      alert("Contato atualizado com sucesso!");
+      toast.success("Contato atualizado com sucesso!", {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setModalUpdate(false);
     } catch (error) {
+      toast.error("Ops, deu algum erro, tente novamente!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       console.error(error);
     }
   };
@@ -96,9 +145,28 @@ const ContactProvider = ({ children }: ContactProviderProps) => {
         },
       });
 
-      alert("Contato removido com sucesso!");
+      toast.success("Contato removido com sucesso!", {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setModalDelete(false);
     } catch (error) {
+      toast.error("Ops, deu algum erro, tente novamente!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       console.error(error);
     }
   };

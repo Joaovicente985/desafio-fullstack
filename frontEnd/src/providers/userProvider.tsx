@@ -4,6 +4,10 @@ import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { tRegister } from "../pages/register/validator";
 import { iUser } from "../interfaces";
+import axios from "axios";
+import React from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface UserProviderProps {
   children: ReactNode;
@@ -43,8 +47,43 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
       localStorage.setItem("@Token", token);
 
+      toast.success("Seja bem vindo!", {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       navigate("/dashboard");
     } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.message.includes("403")) {
+          toast.error("E-mail ou senha inválidos!", {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          toast.error("Houve algum erro, tente novamente mais tarde!", {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      }
       console.error(error);
     }
   };
@@ -53,9 +92,43 @@ const UserProvider = ({ children }: UserProviderProps) => {
     try {
       await api.post("/users", data);
 
-      alert("Usuário cadastrado com sucesso!");
+      toast.success("Cadastro realizado com sucesso!", {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       navigate("/");
     } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.data.message.includes("already exists")) {
+          toast.error("Este e-mail ja está sendo utilizado!", {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          toast.error("Houve algum erro, tente novamente mais tarde!", {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      }
       console.error(error);
     }
   };
@@ -75,9 +148,43 @@ const UserProvider = ({ children }: UserProviderProps) => {
       });
       setUser(response.data);
 
-      alert("Usuário atualizado com sucesso!");
+      toast.success("Usuário atualizado com sucesso", {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setModalUpdateUser(false);
     } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.data.message.includes("violates unique")) {
+          toast.error("Este e-mail ja está sendo utilizado!", {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          toast.error("Houve algum erro, tente novamente mais tarde!", {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      }
       console.error(error);
     }
   };
@@ -90,9 +197,28 @@ const UserProvider = ({ children }: UserProviderProps) => {
         },
       });
 
-      alert("Usuário deletado com sucesso, redirecionando...");
+      toast.success("Usuário deletado com sucesso, redirecionando...", {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       navigate("");
     } catch (error) {
+      toast.error("Houve algum erro, tente novamente mais tarde!", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       console.error(error);
     }
   };
