@@ -1,9 +1,6 @@
 import { ReactNode, createContext, useState } from "react";
 import { api } from "../services/api";
-import {
-  tContact,
-  tContactUpdate,
-} from "../components/modalCreateForm/validator";
+import { tContact } from "../components/modalCreateForm/validator";
 import { iContact } from "../interfaces";
 import { toast } from "react-toastify";
 
@@ -14,7 +11,7 @@ interface ContactProviderProps {
 interface ContactContextValues {
   readContact: () => void;
   createContact: (data: tContact) => void;
-  updateContact: (data: tContactUpdate) => void;
+  updateContact: (data: tContact) => void;
   deleteContact: () => void;
   contactInfo: iContact | void;
   setContactInfo: React.Dispatch<React.SetStateAction<iContact | undefined>>;
@@ -101,7 +98,7 @@ const ContactProvider = ({ children }: ContactProviderProps) => {
     }
   };
 
-  const updateContact = async (data: tContactUpdate) => {
+  const updateContact = async (data: tContact) => {
     const id = localStorage.getItem("@Id");
     try {
       api.patch(`/contacts/${id}`, data, {

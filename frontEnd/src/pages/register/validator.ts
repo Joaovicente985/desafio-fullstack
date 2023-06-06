@@ -1,7 +1,11 @@
 import { z } from "zod";
 
 const registerSchema = z.object({
-  fullName: z.string().nonempty("Insira o nome completo").min(10).max(120),
+  fullName: z
+    .string()
+    .nonempty("Insira o nome completo")
+    .min(10, "O nome deve conter pelo menos 10 caractéres")
+    .max(120, "O nome deve conter no máximo 120 caractéres"),
   email: z.string().email("Insira um e-mail válido"),
   password: z
     .string()
