@@ -1,10 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContact } from "../../hooks/useContact";
-import {
-  contactSchemaUpdate,
-  tContactUpdate,
-} from "../modalCreateForm/validator";
+import { contactSchema, tContact } from "../modalCreateForm/validator";
 import { ErrorMessage, StyledModalForm } from "../modalCreateForm/style";
 
 const ModalUpdateForm = () => {
@@ -12,8 +9,8 @@ const ModalUpdateForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<tContactUpdate>({
-    resolver: zodResolver(contactSchemaUpdate),
+  } = useForm<tContact>({
+    resolver: zodResolver(contactSchema),
   });
 
   const { updateContact, contactInfo } = useContact();
