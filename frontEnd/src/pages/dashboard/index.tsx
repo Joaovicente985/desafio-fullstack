@@ -147,7 +147,7 @@ const Dashboard = () => {
             </span>
             <section>
               <button
-                className="alert"
+                className="update"
                 onClick={() => setModalUpdateUser(true)}
               >
                 Editar
